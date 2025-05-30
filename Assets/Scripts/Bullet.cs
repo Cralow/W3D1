@@ -11,7 +11,14 @@ public class Bullet : MonoBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
             pSC.AddScore();
-            Destroy(collision.gameObject);
+
+            collision.gameObject.GetComponent<Enemy>().GetDamage();
+
+            AudioSource[] aslist = collision.gameObject.GetComponents<AudioSource>();
+            int randomAu = Random.Range(0, aslist.Length);
+            aslist[randomAu].Play();
+
+
             Destroy(gameObject);
 
         }

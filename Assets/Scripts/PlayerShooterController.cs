@@ -28,6 +28,7 @@ public class PlayerShooterController : MonoBehaviour
     {
         buttonCanvas.gameObject.SetActive(false);
         playerController = GetComponent<PlayerController>();
+
     }
     public GameObject FindNearestEnemy()
     {
@@ -65,7 +66,14 @@ public class PlayerShooterController : MonoBehaviour
 
 
     }
-    // Update is called once per frame
+    public void ShotVfx()
+    {
+        playerController.StateUpdate(PlayerController.PlayerStates.Sparo);
+        transform.GetComponent<AudioSource>().Play();
+
+
+
+    }
     void Update()
     {
         fireCoolDown -= Time.deltaTime;
@@ -132,6 +140,8 @@ public class PlayerShooterController : MonoBehaviour
 
             a.GetComponent<Rigidbody2D>().AddForce(fireDirection * force, ForceMode2D.Impulse);
              a.GetComponent<Bullet>().pSC = gameObject.GetComponent<PlayerShooterController>();
+
+            ShotVfx();
             //new Vector2(FindNearestEnemy().transform.position.x ,transform.position.y)
 
             //UI
